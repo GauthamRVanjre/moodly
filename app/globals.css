@@ -3,25 +3,75 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f9fafb;
+  --foreground: #111827;
+  --primary: #8b5cf6;
+  --primary-light: #c4b5fd;
+  --happy: #fef3c7;
+  --sad: #dbeafe;
+  --angry: #fee2e2;
+  --neutral: #e5e7eb;
+  --excited: #fde68a;
+  --love: #fce7f3;
+  --tired: #e0e7ff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #111827;
+    --foreground: #f9fafb;
+    --primary: #a78bfa;
+    --primary-light: #c4b5fd;
+    --happy: #78350f;
+    --sad: #1e3a8a;
+    --angry: #7f1d1d;
+    --neutral: #374151;
+    --excited: #92400e;
+    --love: #831843;
+    --tired: #312e81;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.mood-transition {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.mood-happy {
+  @apply bg-amber-100 dark:bg-amber-900/50;
+}
+
+.mood-sad {
+  @apply bg-blue-100 dark:bg-blue-900/50;
+}
+
+.mood-angry {
+  @apply bg-red-100 dark:bg-red-900/50;
+}
+
+.mood-neutral {
+  @apply bg-gray-100 dark:bg-gray-800/50;
+}
+
+.mood-excited {
+  @apply bg-yellow-200 dark:bg-yellow-900/50;
+}
+
+.mood-love {
+  @apply bg-pink-100 dark:bg-pink-900/50;
+}
+
+.mood-tired {
+  @apply bg-indigo-100 dark:bg-indigo-900/50;
 }

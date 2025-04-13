@@ -1,8 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Moodly - Habit & Mood Tracker
+
+Moodly is a simple, UI-only habit and mood tracking app built with Next.js (App Router) and Tailwind CSS.
+
+## Features
+
+- **Daily Habit Dashboard**: Add and track your daily habits with streaks
+- **Monthly Calendar View**: View your habit completion status for the current month
+- **Habit Progress Visualization**: See your daily habit completion progress with visual indicators
+- **Emoji Mood Tracker**: Track your daily mood using fun emojis
+- **Streak Tracking & Celebrations**: Get motivated with streak counts and celebratory animations
+- **Daily Reminders**: Set custom time-based reminders for your habits
+- **Habit Completion Animations**: Enjoy delightful micro-interactions when marking habits complete
+- **Smooth Animations**: Built with Framer Motion for engaging interactions
+- **Responsive Design**: Works on all devices
+
+## Tech Stack
+
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Framer Motion
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -10,15 +41,28 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Add new habits using the form in the Daily Habits dashboard
+- Click on a habit to mark it as complete and track your streaks
+- Celebrate milestone streaks with fun animations
+- Set daily reminders for your habits with custom times
+- Click on a day in the calendar to view completed habits for that day
+- Select a mood emoji for each day to track your emotional state
+- Use the month navigation controls to move between months
+- View your mood statistics in the monthly summary section
+
+## UI-Only App
+
+This is a UI-only version with no backend or authentication. Data is not persisted between sessions.
+
+## License
+
+MIT
 
 ## Learn More
 
