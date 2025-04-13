@@ -170,7 +170,7 @@ export default function HabitDashboard() {
                 value={habitName}
                 onChange={(e) => setHabitName(e.target.value)}
                 placeholder="Add a new habit..."
-                className="flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="md:w-1/2 flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary"
               />
               <button
                 type="submit"
