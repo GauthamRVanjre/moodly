@@ -9,7 +9,6 @@ Moodly is a simple, UI-only habit and mood tracking app built with Next.js (App 
 - **Habit Progress Visualization**: See your daily habit completion progress with visual indicators
 - **Emoji Mood Tracker**: Track your daily mood using fun emojis
 - **Streak Tracking & Celebrations**: Get motivated with streak counts and celebratory animations
-- **Daily Reminders**: Set custom time-based reminders for your habits
 - **Habit Completion Animations**: Enjoy delightful micro-interactions when marking habits complete
 - **Smooth Animations**: Built with Framer Motion for engaging interactions
 - **Responsive Design**: Works on all devices
@@ -20,6 +19,7 @@ Moodly is a simple, UI-only habit and mood tracking app built with Next.js (App 
 - TypeScript
 - Tailwind CSS
 - Framer Motion
+- LocalStorage for data persistence
 
 ## Getting Started
 
@@ -53,12 +53,22 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Set daily reminders for your habits with custom times
 - Click on a day in the calendar to view completed habits for that day
 - Select a mood emoji for each day to track your emotional state
+- All your data persists between sessions using localStorage
 - Use the month navigation controls to move between months
 - View your mood statistics in the monthly summary section
 
 ## UI-Only App
 
 This is a UI-only version with no backend or authentication. Data is not persisted between sessions.
+
+## Data Storage
+
+This app uses localStorage for data persistence, which means:
+
+- Your habits and streaks will be saved across browser sessions
+- Daily habit completion status is tracked and maintained
+- Mood selections are persisted for each day
+- Data is stored locally in your browser (not on a server)
 
 ## License
 

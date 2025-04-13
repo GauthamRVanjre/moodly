@@ -26,6 +26,7 @@ export default function StreakModal({
       return "Impressive! You're building a strong habit!";
     if (streakCount === 1)
       return "Great job! You're on your way to a new habit!";
+    return "Keep it up! You're on a streak!";
   };
 
   // Different emoji for different streak milestones

@@ -1,48 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
-
-type Mood = {
-  emoji: string;
-  name: string;
-};
-
-const moods: Mood[] = [
-  { emoji: "😊", name: "happy" },
-  { emoji: "😢", name: "sad" },
-  { emoji: "😡", name: "angry" },
-  { emoji: "😐", name: "neutral" },
-  { emoji: "🤩", name: "excited" },
-  { emoji: "❤️", name: "love" },
-  { emoji: "😴", name: "tired" },
-];
-
-// Mock data for habits by date
-const mockHabitsByDate: Record<
-  string,
-  { id: string; name: string; completed: boolean }[]
-> = {
-  "2023-6-15": [
-    { id: "1", name: "Drink 2L of water", completed: true },
-    { id: "2", name: "Meditate for 10 minutes", completed: false },
-    { id: "3", name: "Read for 30 minutes", completed: true },
-  ],
-  "2023-6-16": [
-    { id: "1", name: "Drink 2L of water", completed: true },
-    { id: "2", name: "Meditate for 10 minutes", completed: true },
-    { id: "3", name: "Read for 30 minutes", completed: true },
-  ],
-  // Add more dates as needed
-};
-
-type DayTileProps = {
-  day: number;
-  month: number;
-  year: number;
-  isCurrentDay: boolean;
-  isCurrentMonth: boolean;
-};
+import { useEffect, useState } from "react";
+import { DayTileProps, HabitType, Mood, moods } from "../constants/constant";
 
 export default function DayTile({
   day,
@@ -54,10 +14,17 @@ export default function DayTile({
   const [selectedMood, setSelectedMood] = useState<Mood | null>(null);
   const [showMoodPicker, setShowMoodPicker] = useState(false);
   const [showHabits, setShowHabits] = useState(false);
+  const [dayHabits, setDayHabits] = useState<HabitType[]>([]);
 
   const dateString = `${year}-${month + 1}-${day}`;
-  // Use mock data or default to an empty array
-  const dayHabits = mockHabitsByDate[dateString] || [];
+
+  // Load habits and mood data from localStorage
+  useEffect(() => {
+    // Get habits for this date
+    const habits = JSON.parse(localStorage.getItem("Habits") || "[]");
+    setDayHabits(habits);
+  }, [dateString]);
+
   const completedCount = dayHabits.filter((h) => h.completed).length;
   const totalHabits = dayHabits.length;
   const completionPercentage =
@@ -79,10 +46,10 @@ export default function DayTile({
       }
     }
   };
-
+  console.log("completed ", completedCount, totalHabits);
   return (
     <motion.div
-      className={`relative aspect-square rounded-lg shadow-sm overflow-hidden cursor-pointer hover:scale-150 transition-all duration-300
+      className={`relative aspect-square rounded-lg shadow-sm overflow-hidden cursor-pointer
         ${
           isCurrentMonth
             ? "bg-white dark:bg-gray-800"

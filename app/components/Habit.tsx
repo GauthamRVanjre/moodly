@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CheckIcon } from "./Icons";
 import StreakModal from "./StreakModal";
 
@@ -10,6 +10,7 @@ type HabitProps = {
   name: string;
   streakCount?: number;
   onToggle?: (id: string, completed: boolean) => void;
+  onStreakUpdate?: (id: string, newStreak: number) => void;
 };
 
 export default function Habit({
@@ -17,6 +18,7 @@ export default function Habit({
   name,
   streakCount = 0,
   onToggle,
+  onStreakUpdate,
 }: HabitProps) {
   const [completed, setCompleted] = useState(false);
   const [streak, setStreak] = useState(streakCount);
@@ -24,6 +26,11 @@ export default function Habit({
   const [lastCompletedTime, setLastCompletedTime] = useState<number | null>(
     null
   );
+
+  // Update streak if streakCount prop changes
+  useEffect(() => {
+    setStreak(streakCount);
+  }, [streakCount]);
 
   const handleToggle = () => {
     const newCompletedState = !completed;
@@ -39,8 +46,12 @@ export default function Habit({
         const newStreak = streak + 1;
         setStreak(newStreak);
         setLastCompletedTime(now);
-
         setShowModal(true);
+
+        // Update streak in parent component to persist in localStorage
+        if (onStreakUpdate) {
+          onStreakUpdate(id, newStreak);
+        }
       }
     }
 

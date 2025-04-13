@@ -108,41 +108,43 @@ export default function MonthGrid({ currentMonth }: MonthGridProps) {
   };
 
   return (
-    <div className="mt-4">
-      {/* Week day headers */}
-      <div className="grid grid-cols-7 gap-2 mb-2">
-        {daysOfWeek.map((day) => (
-          <div
-            key={day}
-            className="text-center text-xs font-semibold text-gray-500 uppercase"
-          >
-            {day}
-          </div>
-        ))}
-      </div>
+    <>
+      <div className="mt-4">
+        {/* Week day headers */}
+        <div className="grid grid-cols-7 gap-2 mb-2">
+          {daysOfWeek.map((day) => (
+            <div
+              key={day}
+              className="text-center text-xs font-semibold text-gray-500 uppercase"
+            >
+              {day}
+            </div>
+          ))}
+        </div>
 
-      {/* Calendar grid */}
-      <motion.div
-        className="grid grid-cols-7 gap-2"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {calendarDays.map((day, index) => (
-          <motion.div
-            key={`${day.year}-${day.month}-${day.day}`}
-            variants={itemVariants}
-          >
-            <DayTile
-              day={day.day}
-              month={day.month}
-              year={day.year}
-              isCurrentDay={isToday(day.day) && day.isCurrentMonth}
-              isCurrentMonth={day.isCurrentMonth}
-            />
-          </motion.div>
-        ))}
-      </motion.div>
-    </div>
+        {/* Calendar grid */}
+        <motion.div
+          className="grid grid-cols-7 gap-2"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {calendarDays.map((day, index) => (
+            <motion.div
+              key={`${day.year}-${day.month}-${day.day}`}
+              variants={itemVariants}
+            >
+              <DayTile
+                day={day.day}
+                month={day.month}
+                year={day.year}
+                isCurrentDay={isToday(day.day) && day.isCurrentMonth}
+                isCurrentMonth={day.isCurrentMonth}
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </>
   );
 }
