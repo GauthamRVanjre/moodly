@@ -40,15 +40,12 @@ export default function Habit({
         setStreak(newStreak);
         setLastCompletedTime(now);
 
-        // Show modal for significant streak milestones
-        if (newStreak === 1 || newStreak === 21 || newStreak % 5 === 0) {
-          setShowModal(true);
-        }
+        setShowModal(true);
       }
     }
 
     if (onToggle) {
-      onToggle(id, newCompletedState);
+      onToggle(id, completed);
     }
   };
 
