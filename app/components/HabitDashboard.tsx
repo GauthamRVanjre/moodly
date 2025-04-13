@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { HABITS, HabitType, initialHabits } from "../constants/constant";
 import Habit from "./Habit";
+import Reminder from "./Reminder";
 
 export default function HabitDashboard() {
   const [habits, setHabits] = useState<HabitType[]>([]);
   const [habitName, setHabitName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<"habits" | "reminders">("habits");
 
   // Load habits from localStorage on component mount
   useEffect(() => {
@@ -134,45 +136,76 @@ export default function HabitDashboard() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        <>
-          <h2 className="text-lg font-semibold mb-4">Today's Tasks</h2>
-
-          <form onSubmit={addHabit} className="mb-6 flex">
-            <input
-              type="text"
-              value={habitName}
-              onChange={(e) => setHabitName(e.target.value)}
-              placeholder="Add a new habit..."
-              className="md:w-1/2 flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-            <button
-              type="submit"
-              className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-r-lg transition-colors"
-            >
-              Add
-            </button>
-          </form>
-
-          <motion.div
-            className="space-y-3"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+        {/* Tabs */}
+        <div className="flex border-b mb-4">
+          <button
+            className={`px-4 py-2 font-medium text-sm ${
+              activeTab === "habits"
+                ? "border-b-2 border-primary text-primary"
+                : "text-gray-500 hover:text-gray-700"
+            }`}
+            onClick={() => setActiveTab("habits")}
           >
-            {habits.map((habit) => (
-              <motion.div key={habit.id} variants={itemVariants}>
-                <Habit
-                  id={habit.id}
-                  name={habit.name}
-                  streakCount={habit.streakCount}
-                  onToggle={handleHabitToggle}
-                  onStreakUpdate={handleStreakUpdate}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
-        </>
+            Habits
+          </button>
+          <button
+            className={`px-4 py-2 font-medium text-sm ${
+              activeTab === "reminders"
+                ? "border-b-2 border-primary text-primary"
+                : "text-gray-500 hover:text-gray-700"
+            }`}
+            onClick={() => setActiveTab("reminders")}
+          >
+            Reminders
+          </button>
+        </div>
+
+        {activeTab === "habits" && (
+          <>
+            <h2 className="text-lg font-semibold mb-4">Today's Habits</h2>
+
+            <form onSubmit={addHabit} className="mb-6 flex">
+              <input
+                type="text"
+                value={habitName}
+                onChange={(e) => setHabitName(e.target.value)}
+                placeholder="Add a new habit..."
+                className="flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+              <button
+                type="submit"
+                className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-r-lg transition-colors"
+              >
+                Add
+              </button>
+            </form>
+
+            <motion.div
+              className="space-y-3"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {habits.map((habit) => (
+                <motion.div key={habit.id} variants={itemVariants}>
+                  <Habit
+                    id={habit.id}
+                    name={habit.name}
+                    streakCount={habit.streakCount}
+                    onToggle={handleHabitToggle}
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+          </>
+        )}
+        {activeTab === "reminders" && <Reminder habits={habits} />}
       </motion.div>
+      {activeTab === "habits" && (
+        <div className="hidden md:block">
+          <Reminder habits={habits} />
+        </div>
+      )}
     </div>
   );
 }
